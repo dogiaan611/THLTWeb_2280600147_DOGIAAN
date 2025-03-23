@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<THLTWeb_2280600147_DOGIAAN.Models.Category>
+
+<h2>Category</h2>
+<a asp-controller="Category" asp-action="Add">Create New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>
+                    <a asp-action="Display" asp-route-id="@category.Id" class=" btn btn-success">View</a> 
+                    <a asp-action="Update" asp-route-id="@category.Id" class=" btn btn-warning">Edit</a> 
+                    <a asp-action="Delete" asp-route-id="@category.Id" class=" btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THLTWeb_2280600147_DOGIAAN", "THLTWeb_2280600147_DOGIAAN\THLTWeb_2280600147_DOGIAAN.csproj", "{0F569726-726F-4B53-B3A1-C69B369309C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F569726-726F-4B53-B3A1-C69B369309C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F569726-726F-4B53-B3A1-C69B369309C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F569726-726F-4B53-B3A1-C69B369309C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F569726-726F-4B53-B3A1-C69B369309C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58DFBE40-F935-4684-92A0-09FA9F633905}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model THLTWeb_2280600147_DOGIAAN.Models.Product
+
+<div class="container mt-5">
+	<div class="card shadow-lg p-4">
+		<h2>Product Details</h2>
+
+		<div>
+			<h4 class="fw-bold text-primary">Name: <span class="text-dark">@Model.Name</span></h4>
+			<h4 class="fw-bold text-danger">Price: <span class="text-dark">@Model.Price</span></h4>
+			<h4 class="fw-bold text-muted">Description: <span class="text-dark">@Model.Description</span></h4>
+		</div>
+
+		<div>
+			@if (!string.IsNullOrEmpty(Model.ImageUrl))
+			{
+				<img src="@Model.ImageUrl" alt="Product Image" style="max-width: 200px;" />
+			}
+			else
+			{
+				<p>No Image Available</p>
+			}
+		</div>
+		<div>
+			<a asp-action="Update" asp-route-id="@Model.Id"class=" btn btn-warning mt-3">Chỉnh sửa</a>
+			<a asp-action="Index" class=" btn btn-secondary mt-3">Back to List</a>
+		</div>
+	</div>
+</div>
+
