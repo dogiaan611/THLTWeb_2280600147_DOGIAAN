@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace THLTWeb_2280600147_DOGIAAN.Models
 {
-    public class AnDbContext :DbContext
+    public class AnDbContext : IdentityDbContext<ApplicationUser>
     {
         public AnDbContext(DbContextOptions<AnDbContext> options) : base(options)
         {

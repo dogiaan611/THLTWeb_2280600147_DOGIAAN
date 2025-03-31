@@ -3,9 +3,12 @@ using THLTWeb_2280600147_DOGIAAN.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
-namespace THLTWeb_2280600147_DOGIAAN.Controllers
+namespace THLTWeb_2280600147_DOGIAAN.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;

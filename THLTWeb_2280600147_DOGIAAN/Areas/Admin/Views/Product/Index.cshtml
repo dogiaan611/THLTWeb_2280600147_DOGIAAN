@@ -3,9 +3,8 @@
 *@
 
 @model IEnumerable<THLTWeb_2280600147_DOGIAAN.Models.Product>
-
 <h2>Products</h2>
-<a asp-controller="Product" asp-action="Add" class=" btn btn-primary">Add Product</a>
+<a asp-area="Admin" asp-controller="Product" asp-action="Add" class=" btn btn-primary">Add Product</a>
 <table class="table">
     <thead>
         <tr>
@@ -27,9 +26,9 @@
                 <td><img src="@product.ImageUrl" alt="Product Image" width="100" height="100" style="object-fit:cover;" /></td>
                 <td>@(product.Category != null ? product.Category.Name : "No Category")</td>
                 <td>
-                    <a asp-action="Display" asp-route-id="@product.Id" class=" btn btn-success mt-1 w-100"> View </a>
-                    <a asp-action="Update" asp-route-id="@product.Id" class=" btn btn-warning mt-1 w-100"> Edit </a>
-                    <a asp-action="Delete" asp-route-id="@product.Id" class=" btn btn-danger mt-1 w-100">Delete</a>
+                    <a asp-area="Admin" asp-action="Display" asp-route-id="@product.Id" class=" btn btn-success mt-1 w-100"> View </a>
+                    <a asp-area="Admin" asp-action="Update" asp-route-id="@product.Id" class=" btn btn-warning mt-1 w-100"> Edit </a>
+                    <a asp-area="Admin" asp-action="Delete" asp-route-id="@product.Id" class=" btn btn-danger mt-1 w-100">Delete</a>
                 </td>
             </tr>
         }
