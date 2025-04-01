@@ -1,0 +1,189 @@
+﻿@{
+    ViewData["Title"] = "Quản lý Sản phẩm";
+}
+
+<div class="container mt-4">
+    <h2>Quản lý Sản phẩm</h2>
+
+    <!-- Form thêm/sửa sản phẩm -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Thêm/Sửa Sản phẩm</h5>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <div class="mb-3">
+                    <label for="productName" class="form-label">Tên sản phẩm</label>
+                    <input type="text" class="form-control" id="productName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="productPrice" class="form-label">Giá</label>
+                    <input type="number" class="form-control" id="productPrice" step="0.01" min="0" required>
+                </div>
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">Mô tả</label>
+                    <textarea class="form-control" id="productDescription" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="button" class="btn btn-secondary" onclick="resetForm()">Hủy</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Danh sách sản phẩm -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Danh sách Sản phẩm</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Mô tả</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productList">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Hàm lấy danh sách sản phẩm
+        async function getProducts() {
+            try {
+                const response = await fetch('/api/products');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const products = await response.json();
+                console.log('Products received:', products); // Debug log
+                displayProducts(products);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                alert('Có lỗi xảy ra khi lấy danh sách sản phẩm');
+            }
+        }
+
+        // Hàm hiển thị danh sách sản phẩm
+        function displayProducts(products) {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            
+            if (!Array.isArray(products)) {
+                console.error('Products is not an array:', products);
+                return;
+            }
+
+            products.forEach(product => {
+                if (!product) {
+                    console.error('Invalid product:', product);
+                    return;
+                }
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.Name || ''}</td>
+                    <td>${product.Price ? product.Price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) : ''}</td>
+                    <td>${product.Description || ''}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editProduct(${product.Id})">Sửa</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.Id})">Xóa</button>
+                    </td>
+                `;
+                productList.appendChild(row);
+            });
+        }
+
+
+        // Hàm thêm/sửa sản phẩm
+        document.getElementById('productForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const productId = document.getElementById('productId').value;
+            const product = {
+                Name: document.getElementById('productName').value,
+                Price: parseFloat(document.getElementById('productPrice').value),
+                Description: document.getElementById('productDescription').value
+            };
+
+            if (productId) {
+                product.Id = parseInt(productId);
+            }
+
+            try {
+                const url = productId ? `/api/products/${productId}` : '/api/products';
+                const method = productId ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(product)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+
+                alert(productId ? 'Cập nhật sản phẩm thành công!' : 'Thêm sản phẩm thành công!');
+                resetForm();
+                getProducts();
+            } catch (error) {
+                console.error('Error saving product:', error);
+                alert('Có lỗi xảy ra khi lưu sản phẩm');
+            }
+        });
+
+        // Hàm sửa sản phẩm
+        async function editProduct(id) {
+            try {
+                const response = await fetch(`/api/products/${id}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const product = await response.json();
+                document.getElementById('productId').value = product.Id;
+                document.getElementById('productName').value = product.Name;
+                document.getElementById('productPrice').value = product.Price;
+                document.getElementById('productDescription').value = product.Description || '';
+            } catch (error) {
+                console.error('Error fetching product:', error);
+                alert('Có lỗi xảy ra khi lấy thông tin sản phẩm');
+            }
+        }
+
+        // Hàm xóa sản phẩm
+        async function deleteProduct(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+                try {
+                    const response = await fetch(`/api/products/${id}`, {
+                        method: 'DELETE'
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    alert('Xóa sản phẩm thành công!');
+                    getProducts();
+                } catch (error) {
+                    console.error('Error deleting product:', error);
+                    alert('Có lỗi xảy ra khi xóa sản phẩm');
+                }
+            }
+        }
+
+        // Hàm reset form
+        function resetForm() {
+            document.getElementById('productForm').reset();
+            document.getElementById('productId').value = '';
+        }
+
+        // Load danh sách sản phẩm khi trang được tải
+        document.addEventListener('DOMContentLoaded', getProducts);
+    </script>
+}
