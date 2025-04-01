@@ -1,4 +1,9 @@
-﻿@model IEnumerable<THLTWeb_2280600147_DOGIAAN.Models.Product>
+﻿@{
+    ViewData["Title"] = "Home Page";
+    int numOfQuantity = 1;
+}
+
+@model IEnumerable<THLTWeb_2280600147_DOGIAAN.Models.Product>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +28,9 @@
                             <h5 class="card-title">@product.Name</h5>
                             <p class="text-muted"><strong>Danh mục:</strong> @(product.Category != null ? product.Category.Name : "Không có danh mục")</p>
                             <p class="card-text"><strong>Giá:</strong> @product.Price VND</p>
-                            <a href="#" class="btn btn-primary">Mua Ngay</a>
+                            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-productId="@product.Id" asp-route-quantity="@numOfQuantity" >
+                                <button class="btn btn-primary"> <i class="bi-cart-fill me-1"></i>Add to cart</button>
+                            </a>
                         </div>
                     </div>
                 </div>

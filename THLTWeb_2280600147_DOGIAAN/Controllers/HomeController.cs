@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using THLTWeb_2280600147_DOGIAAN.Models;
+using THLTWeb_2280600147_DOGIAAN.Repositories;
 
 namespace THLTWeb_2280600147_DOGIAAN.Controllers
 {
     public class HomeController : Controller
     {
         private readonly AnDbContext _context;
-
         public HomeController(AnDbContext context)
         {
             _context = context;

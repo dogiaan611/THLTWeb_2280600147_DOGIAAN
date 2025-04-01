@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using THLTWeb_2280600147_DOGIAAN.Models;
 
@@ -11,9 +12,11 @@ using THLTWeb_2280600147_DOGIAAN.Models;
 namespace THLTWeb_2280600147_DOGIAAN.Migrations
 {
     [DbContext(typeof(AnDbContext))]
-    partial class AnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250331190947_InitialOrder")]
+    partial class InitialOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

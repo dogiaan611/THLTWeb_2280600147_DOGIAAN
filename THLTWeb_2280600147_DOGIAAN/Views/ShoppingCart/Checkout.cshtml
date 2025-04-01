@@ -1,0 +1,23 @@
+﻿@model Order
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6 col-lg-10">
+			<div class="card shadow-lg p-4">
+<h2>Checkout</h2>
+
+<form asp-action="Checkout" method="post">
+	<div class="form-group">
+		<label asp-for="ShippingAddress">Shipping Address</label>
+		<input asp-for="ShippingAddress" class="form-control" />
+	</div>
+	<div class="form-group">
+		<label asp-for="Notes">Notes</label>
+		<textarea asp-for="Notes" class="form-control"></textarea>
+	</div>
+	<button type="submit" class="btn btn-primary mt-3">Place Order</button>
+</form>
+			</div>
+		</div>
+	</div>
+	</div>
