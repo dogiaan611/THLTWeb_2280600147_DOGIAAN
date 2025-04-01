@@ -20,9 +20,6 @@
                 </div>
                 <div class="card-body">
                     <dl class="row">
-                        <dt class="col-sm-4">Order ID</dt>
-                        <dd class="col-sm-8">@Model.Id</dd>
-
                         <dt class="col-sm-4">Customer</dt>
                         <dd class="col-sm-8">@Model.ApplicationUser?.UserName</dd>
 
@@ -30,7 +27,7 @@
                         <dd class="col-sm-8">@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</dd>
 
                         <dt class="col-sm-4">Total Price</dt>
-                        <dd class="col-sm-8">$@Model.TotalPrice.ToString("N2")</dd>
+                        <dd class="col-sm-8">@Model.TotalPrice.ToString("N2")0 VND</dd>
 
                         <dt class="col-sm-4">Shipping Address</dt>
                         <dd class="col-sm-8">@Model.ShippingAddress</dd>
@@ -64,15 +61,15 @@
                                     <tr>
                                         <td>@item.Product?.Name</td>
                                         <td>@item.Quantity</td>
-                                        <td>$@item.Price.ToString("N2")</td>
-                                        <td>$@((item.Price * item.Quantity).ToString("N2"))</td>
+                                        <td>@item.Price.ToString("N2")0 VND</td>
+                                        <td>@((item.Price * item.Quantity).ToString("N2"))0 VND</td>
                                     </tr>
                                 }
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                                    <td><strong>$@Model.TotalPrice.ToString("N2")</strong></td>
+                                    <td><strong>@Model.TotalPrice.ToString("N2")0 VND</strong></td>
                                 </tr>
                             </tfoot>
                         </table>
